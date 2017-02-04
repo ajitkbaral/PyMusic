@@ -1,0 +1,20 @@
+{% extends 'music/base.html' %}
+
+{% block title %}PyMusic | Songs{% endblock %}
+
+
+{% if error_message %}
+	<p><strong>{{error_message}}</strong></p>
+{% endif %}
+
+{% block body %}
+<img src="{{album.album_logo}}" height="100px" width="100px">
+<h3>{{album.album_title}}</h3>
+<span>{{album.artist}}</span>
+<br/>
+{% for song in  album.song_set.all%}
+<ul>
+	<li>{{song.song_title}}</li>
+</ul>
+{% endfor %}
+{% endblock %}
