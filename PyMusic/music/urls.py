@@ -5,6 +5,7 @@ app_name = 'music'
 
 urlpatterns=[
 	url(r'^$', views.IndexView.as_view(), name='index'),
+	url(r'^register/$', views.UserFormView.as_view(), name='register'),
 	url(r'^(?P<pk>\d+)/$', views.DetailView.as_view(), name='detail'),
 	url(r'album/add/$', views.AlbumCreate.as_view(), name="album-add"),
 	url(r'album/(?P<pk>\d+)/$', views.AlbumUpdate.as_view(), name="album-update"),
