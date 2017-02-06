@@ -8,57 +8,39 @@
 			{% endif %}
 
 			{% block body %}
-			<div class="row">
-			  <div class="col-md-2">
-			    <div class="thumbnail">
-			      <img src="{{ album.album_logo.url }}" alt="{{ album.album_title }}" >
-			      <div class="caption">
-			        <h3>{{ album.album_title }}</h3>
-			        <h2>{{ album.artist }}</h2>
-			      </div>
-			    </div>
-			  </div>
-			  <div class="col-md-10">
-			  	<div class="row">
-					  <div class="container-fluid">
-						<div class="row">
-							<a href="" class="btn btn-primary">View All</a>
-							<a href="" class="btn btn-warning">Add New Song</a>
-						</div>
-						<div class="row">
-							<div class="panel panel-default">
-							  <div class="panel-heading"><h2>Songs</h2></div>
-							  <table class="table">
-							    <th>Title</th>
-							    <th>Audio File</th>
-							    <th>Favorite</th>
-							    <th>Action</th>
-							    {% for song in  album.song_set.all%}
-							    <tr>
-							    	<td>
-							    		{{song.song_title}}
-							    	</td>
-							    	<td>
-							    		{{song.file_type}}
-							    	</td>
-							    	<td>
-							    		{{song.is_favorite}}
-							    	</td>
-							    	<td>
-							    		<a href="{% url 'music:album-update' album.id%}" class="btn btn-xs btn-primary">
-							    			<span class="glyphicon glyphicon-pencil">
-							    		</a>
-							    		<a href="" class="btn btn-xs btn-danger">
-							    			<span class="glyphicon glyphicon-remove">
-							    		</a>
-							    	</td>
-							    </tr>
-							    {% endfor %}
-							  </table>
+			<div class="container-fluid">
+				<div class="row">
+				  <div class="col-md-2">
+				    <div class="thumbnail">
+				      <img src="{{ album.album_logo.url }}" alt="{{ album.album_title }}" >
+				      <div class="caption">
+				        <h3>{{ album.album_title }}</h3>
+				        <span>By: <b>{{ album.artist }}</b></span>
+				      </div>
+				    </div>
+				  </div>
+				  
+				  <div class="col-md-10">
+				  	<div class="row">
+						  <div class="container-fluid">
+							<div class="row">
+								<!--<a href="" class="btn btn-primary">View All</a>-->
+								<a href="{% url 'music:song-add' album.id%}" class="btn btn-warning">Add New Song</a>
+							</div>
+							<br>
+							<div class="row">
+								<div class="panel panel-default">
+								  <div class="panel-heading">
+								  	<h3>Songs</h3>
+								  </div>
+								  {% block panel-content %}
+									  
+								  {% endblock %}
+								</div>
 							</div>
 						</div>
 					</div>
+				  </div>
 				</div>
-			  </div>
 			</div>
 			{% endblock %}

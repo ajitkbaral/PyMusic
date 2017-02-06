@@ -1,0 +1,38 @@
+{% extends 'music/detail.html' %}
+
+{% block panel-content %}
+<table class="table">
+	 <th>Title</th>
+	    <th>Audio File</th>
+	    <th>Favorite</th>
+	    <th>Action</th>
+	    {% for song in album.song_set.all %}
+	    <tr>
+	    	<td>
+	    		{{song.song_title}}
+	    	</td>
+	    	<td>
+	    		<a href="{{song.audio_file.url}}" target="_blank">
+	    			<button type="button" class="btn btn-success btn-xs">
+                        <span class="glyphicon glyphicon-play"></span>&nbsp; Play
+                    </button>
+	    		</a>
+	    	</td>
+	    	<td>
+	    		{% if song.is_favorite %}
+	    			<span class="glyphicon glyphicon-star"></span>
+	    		{% else %}
+	    			<span class="glyphicon glyphicon-star-empty"></span>
+	    		{% endif %}
+	    	</td>
+	    	<td>
+	    		<a href="#">
+	    			<button type="button" class="btn btn-danger btn-xs">
+                        <span class="glyphicon glyphicon-remove"></span>&nbsp; Remove
+                    </button>
+	    		</a>
+	    	</td>
+	    </tr>
+	    {% endfor %}
+	  </table>
+{% endblock %}

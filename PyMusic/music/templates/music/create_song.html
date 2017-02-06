@@ -1,0 +1,52 @@
+{% extends 'music/base.html' %}
+{% block title %}Add a New Song{% endblock %}
+{% block albums_active %}active{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+
+    <div class="row">
+				  <div class="col-md-2">
+				    <div class="thumbnail">
+				      <img src="{{ album.album_logo.url }}" alt="{{ album.album_title }}" >
+				      <div class="caption">
+				        <h3>{{ album.album_title }}</h3>
+				        <span>By: <b>{{ album.artist }}</b></span>
+				      </div>
+				    </div>
+				  </div>
+
+        <!-- Right Song Info -->
+        <div class="col-sm-8 col-md-9">
+
+            <ul class="nav nav-pills" style="margin-bottom: 10px;">
+                <li role="presentation"><a href="{% url 'music:detail' album.id %}">View All</a></li>
+                <li role="presentation" class="active"><a href="{% url 'music:song-add' album.id %}">Add New Song</a></li>
+            </ul>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>Add a New Song</h3>
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+                    <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="album" value="{{ album }}">
+                        {% include 'music/form-template.html' %}
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
